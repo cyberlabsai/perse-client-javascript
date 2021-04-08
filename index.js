@@ -46,21 +46,15 @@ const FaceRecClient = (key, timeOut=5*1000) => {
         compareFaces(images) {
             const formData = new FormData()
 
-            let image_counter = 0
-
             images.forEach((image, index) => {
                 if (typeof(image) === "string") {
-                    image_counter++
-
-                    const data_name = `image_token${image_counter}`
+                    const data_name = `image_token${index + 1}`
 
                     formData.append(data_name, image)
                 }
 
                 else if (typeof(image) === "object") {
-                    image_counter++
-
-                    const data_name = `image_file${image_counter}`
+                    const data_name = `image_file${index + 1}`
 
                     formData.append(data_name, image)
                 }
