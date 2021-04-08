@@ -10,7 +10,7 @@ const sendFetch = (address, options, timeOut) => {
 
     return fetch(address, options)
     .then(res => res.json())
-    .catch(err => console.log("Error fetching data:\n", err))
+    .catch(err => console.log("Cyber SDK says:\nError fetching data:\n", err))
     .finally(() => clearTimeout(timeout))
 }
 
@@ -23,11 +23,12 @@ const FaceRecClient = (key, timeOut=5*1000) => {
         apiKey: key,
         timeOut: timeOut,
 
-        uploadImage(image) {
-            const formData = new FormData()
-            formData.append("data", image)
+        detectFaces(image) {
+            if (!image)
+                throw new Error("must provide a valid image")
 
-            const path = "/v0/upload"
+            const formData = new FormData()
+            formData.append("image_file", image)
 
             const options = {
                 method: "POST",
@@ -37,39 +38,49 @@ const FaceRecClient = (key, timeOut=5*1000) => {
                 body: formData
             }
 
+            const path = "/v0/face/detect"
+
             return sendFetch(`${this.url}${path}`, options, this.timeOut)
         },
 
-        detectFaces(uuid) {
-            if (!uuid)
-                throw new Error("must provide a valid image token")
+        compareFaces(images) {
+            const formData = new FormData()
 
-            let options = {
-                method: "GET",
-                headers: {
-                    "x-api-key": this.apiKey
+            let image_counter = 0
+
+            images.forEach((image, index) => {
+                if (typeof(image) === "string") {
+                    image_counter++
+
+                    const data_name = `image_token${image_counter}`
+
+                    formData.append(data_name, image)
                 }
+
+                else if (typeof(image) === "object") {
+                    image_counter++
+
+                    const data_name = `image_file${image_counter}`
+
+                    formData.append(data_name, image)
+                }
+
+                else {
+                    throw `unknown image data at position: ${index}\nvalue is: ${image}`
+                }
+            })
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "x-api-key": this.key
+                },
+                body: formData
             }
 
-            const path = "/v0/facedetect"
+            const path = "/v0/face/compare"
 
-            return sendFetch(`${this.url}${path}?image_token=${uuid}`, options, this.timeOut)
-        },
-
-        compareFaces(uuid1, uuid2) {
-            if (!uuid1 || !uuid2)
-                throw new Error(`must provide valid image uuids\nimage_token 1: ${uuid1}\nimage_token 2: ${uuid2}`)
-
-            let options = {
-                method: "GET",
-                headers: {
-                    "x-api-key": this.apiKey
-                }
-            }
-
-            const path = "/v0/facecompare"
-
-            return sendFetch(`${this.url}${path}?image_token_1=${uuid1}&image_token_2=${uuid2}`, options, this.timeOut)
+            return sendFetch(`${this.url}${path}`, options, this.timeOut)
         }
     }
 }
