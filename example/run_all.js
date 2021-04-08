@@ -14,11 +14,11 @@ const main = async () => {
     const frame_2 = createReadStream("./images/musk2.jpeg")
 
     console.log("detect")
-    const face_1 = await client.detectFaces(frame_1)
+    const faces = await client.detectFaces(frame_1)
 
-    console.log(face_1)
+    console.log(faces)
 
-    const face_token = face_1.image_token
+    const face_token = faces.image_token
 
     console.log("compare")
 

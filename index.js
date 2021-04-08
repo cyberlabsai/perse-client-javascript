@@ -10,7 +10,6 @@ const sendFetch = (address, options, timeOut) => {
 
     return fetch(address, options)
     .then(res => res.json())
-    .catch(err => console.log("Cyber SDK says:\nError fetching data:\n", err))
     .finally(() => clearTimeout(timeout))
 }
 
