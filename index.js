@@ -18,7 +18,7 @@ const FaceRecClient = (key, timeOut=5*1000) => {
         throw new Error("you must provide a valid api key")
 
     return {
-        url: "https://76f5ey2m6j.execute-api.us-east-1.amazonaws.com",
+        url: "api.cyberface.ai",
         apiKey: key,
         timeOut: timeOut,
 
