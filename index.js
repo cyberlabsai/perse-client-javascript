@@ -18,7 +18,7 @@ const FaceRecClient = (key, timeOut=5*1000) => {
         throw new Error("you must provide a valid api key")
 
     return {
-        url: "api.cyberface.ai",
+        url: "https://api.cyberface.ai",
         apiKey: key,
         timeOut: timeOut,
 
@@ -32,7 +32,7 @@ const FaceRecClient = (key, timeOut=5*1000) => {
             const options = {
                 method: "POST",
                 headers: {
-                    "x-api-key": this.key
+                    "x-api-key": this.apiKey
                 },
                 body: formData
             }
@@ -66,7 +66,7 @@ const FaceRecClient = (key, timeOut=5*1000) => {
             const options = {
                 method: "POST",
                 headers: {
-                    "x-api-key": this.key
+                    "x-api-key": this.apiKey
                 },
                 body: formData
             }
