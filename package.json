@@ -1,0 +1,33 @@
+{
+  "name": "cyberface-client-javascript",
+  "version": "1.0.0",
+  "description": "simple client to use the cyberlabs face api",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  },
+  "scripts": {
+    "test": "node exampe/run_all.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberlabsai/cyberface-client-javascript.git"
+  },
+  "keywords": [
+    "face"
+  ],
+  "author": "leozinho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyberlabsai/cyberface-client-javascript/issues"
+  },
+  "homepage": "https://github.com/cyberlabsai/cyberface-client-javascript#readme"
+}
