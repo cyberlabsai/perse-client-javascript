@@ -18,7 +18,7 @@ const FaceRecClient = (key, timeOut=5*1000) => {
         throw new Error("you must provide a valid api key")
 
     return {
-        url: "https://api.cyberface.ai",
+        url: "https://api.getperse.com",
         apiKey: key,
         timeOut: timeOut,
 

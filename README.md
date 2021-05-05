@@ -1,6 +1,6 @@
-# cyberface-client-javascript
+# perse-client-javascript
 
-A simple SDK to help using the CyberFace API.
+A simple SDK to help using the perse API.
 
 
 ## How to use
@@ -17,7 +17,7 @@ Basically, you will need the fetch API, the AbortController and the FormData. If
 Then, just make sure to include the index.js in yur code with:
 
 ```
-const { FaceRecClient } = require("cyberface-client-javascript/index.js")
+const { FaceRecClient } = require("perse-client-javascript/index.js")
 ```
 
 ### Creating the client instance
