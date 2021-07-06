@@ -1,3 +1,5 @@
+[<img src="https://raw.githubusercontent.com/Yoonit-Labs/nativescript-yoonit-camera/development/logo_cyberlabs.png" width="300">](https://cyberlabs.ai/)
+
 # perse-client-javascript
 
 A simple SDK to help using the perse API.
@@ -14,7 +16,7 @@ npm i
 
 Basically, you will need the fetch API, the AbortController and the FormData. If running on browser, they should work natively (at least on newer versions of the browser).
 
-Then, just make sure to include the index.js in yur code with:
+Then, just make sure to include the index.js in your code with:
 
 ```
 const { FaceRecClient } = require("perse-client-javascript/index.js")
@@ -47,10 +49,10 @@ It takes a file data (ReadStream if nodejs and open the image with createReadStr
 You can use the method "compareFaces" to compare two faces.
 
 ```
-const comp = await client.compareFaces(face_list)
+const comp = await client.compareFaces(image_1, image_2)
 ```
 
-It takes a list with either the image tokens returned by the detectFace or the data of the image file (or even both). The list must have exactly 2 images.
+It takes the file data of two image files to be compared.
 
 It will also return a Promise with the object with the server's response.
 
@@ -61,3 +63,5 @@ For further details, take a look on the "examples" directory. You will find some
 ## Exceptions
 
 All the functions are throwable and will throw an Error if you input the wrong type of data on in. Also, The detectFaces and compareFaces are based on the fetch API. They will just foward the exceptions if it throws something.
+
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
