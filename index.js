@@ -13,12 +13,13 @@ const sendFetch = (address, options, timeOut) => {
     .finally(() => clearTimeout(timeout))
 }
 
-const FaceRecClient = (key, timeOut=5*1000) => {
+const FaceRecClient = (key, timeOut=30*1000) => {
     if (!key)
         throw new Error("you must provide a valid api key")
 
     return {
         url: "https://api.getperse.com",
+        apiVersion: "v0",
         apiKey: key,
         timeOut: timeOut,
 
@@ -37,31 +38,16 @@ const FaceRecClient = (key, timeOut=5*1000) => {
                 body: formData
             }
 
-            const path = "/v0/face/detect"
+            const path = "face/detect"
 
-            return sendFetch(`${this.url}${path}`, options, this.timeOut)
+            return sendFetch(`${this.url}/${this.apiVersion}/${path}`, options, this.timeOut)
         },
 
-        compareFaces(images) {
+        compareFaces(image_1, image_2) {
             const formData = new FormData()
 
-            images.forEach((image, index) => {
-                if (typeof(image) === "string") {
-                    const data_name = `image_token${index + 1}`
-
-                    formData.append(data_name, image)
-                }
-
-                else if (typeof(image) === "object") {
-                    const data_name = `image_file${index + 1}`
-
-                    formData.append(data_name, image)
-                }
-
-                else {
-                    throw `unknown image data at position: ${index}\nvalue is: ${image}`
-                }
-            })
+            formData.append("image_file1", image_1)
+            formData.append("image_file2", image_2)
 
             const options = {
                 method: "POST",
@@ -71,9 +57,9 @@ const FaceRecClient = (key, timeOut=5*1000) => {
                 body: formData
             }
 
-            const path = "/v0/face/compare"
+            const path = "face/compare"
 
-            return sendFetch(`${this.url}${path}`, options, this.timeOut)
+            return sendFetch(`${this.url}/${this.apiVersion}/${path}`, options, this.timeOut)
         }
     }
 }
