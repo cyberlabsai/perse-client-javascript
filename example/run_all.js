@@ -9,20 +9,18 @@ const main = async () => {
 
     const client = FaceRecClient(api_key)
 
-    const frame_1 = createReadStream("./images/musk1.jpeg")
+    const frame_1 = createReadStream("./images/img1.jpeg")
 
-    const frame_2 = createReadStream("./images/musk2.jpeg")
+    const frame_2 = createReadStream("./images/img2.jpeg")
 
     console.log("detect")
     const faces = await client.detectFaces(frame_1)
 
     console.log(faces)
 
-    const face_token = faces.image_token
-
     console.log("compare")
 
-    const face_list = [face_token, frame_2]
+    const face_list = [frame_1, frame_2]
 
     const comp = await client.compareFaces(face_list)
 
